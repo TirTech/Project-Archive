@@ -1,0 +1,55 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  title:
+    displayName: Title
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  description:
+    displayName: Description
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  statusId:
+    displayName: Statusid
+    default: 0
+    type: integer
+    required: false
+  creatorId:
+    displayName: Creatorid
+    default: 0
+    type: integer
+    required: false
+  assigneeId:
+    displayName: Assigneeid
+    default: 0
+    type: integer
+    required: false
+  projectId:
+    displayName: Projectid
+    default: 0
+    type: integer
+    required: false
+  type:
+    displayName: Type
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  dateCreated:
+    displayName: Datecreated
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+example: !include issue_example.raml

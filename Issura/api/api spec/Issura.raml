@@ -1,0 +1,210 @@
+#%RAML 1.0
+title: Issura API Specification
+baseUri: https://info3103.cs.unb.ca:32332/
+version: v1.0
+
+securitySchemes: 
+  session-cookie: !include session-cookie.raml
+
+types:
+  user: !include user_type.raml
+  users:
+    type: user[]
+  projectMember: !include projectMember_type.raml
+  projectMembers:
+    type: projectMember[]
+  project: !include project_type.raml
+  projects:
+    type: project[]
+  issueStatus: !include issueStatus_type.raml
+  issueStatuses:
+    type: issueStatus[]
+  issue: !include issue_type.raml
+  issues:
+    type: issue[]
+  comment: !include comment_type.raml
+  comments:
+    type: comment[]
+  linkedIssue: !include linkedIssue_type.raml
+  linkedIssues:
+    type: linkedIssue[]
+  credentials:
+    properties: 
+      username:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+
+traits: 
+  ownerSecured:
+    description: Logged in user must own this resource.
+  memberSecured:
+    description: Logged in user must be a member of the parent project to access this resource.
+
+resourceTypes: 
+  collection: !include collection.raml
+  read_only_collection: !include read_only_collection.raml
+  member: !include member.raml
+  immutable_member: !include immutable_member.raml
+
+securedBy: session-cookie
+
+/login:
+  securedBy: null
+  get:
+    description: Get whether a user is logged in or not
+    responses: 
+      204:
+        description: User is logged in
+      403:
+        description: User is not logged in
+  post:
+    description: Log a user in
+    body: 
+      application/json:
+        type: credentials
+    responses: 
+      204:
+        description: Login successful
+        headers: 
+          Set-Cookie:
+            type: string
+      500:
+        description: Internal Server Error
+      403:
+        description: Login failed
+  delete:
+    description: Log a user out
+    responses: 
+      204:
+        description: User logout successful
+      500:
+        description: Internal Server Error
+/users:
+  type: collection
+  get:
+    queryParameters:
+      search:
+        displayName: Search
+        type: string
+        description: Search user by username or nickname; query will match either containing the query
+        example: bob
+        minLength: 1
+        required: false
+  /{id}:
+    type: member
+    is: ownerSecured
+    /projects:
+      type: read_only_collection
+      is: ownerSecured
+    /issues:
+      type: read_only_collection
+      is: ownerSecured
+      
+/projects:
+  type: collection
+  get:
+    queryParameters:
+      search:
+        displayName: Search
+        type: string
+        description: Search projects by name
+        example: Initech2020 Demo
+        required: false
+  /{id}:
+    type: member
+    put:
+      is: ownerSecured
+    delete:
+      is: ownerSecured
+    /issueStatuses:
+      type: read_only_collection
+    /issues:
+      is: memberSecured
+      type: collection
+      get:
+        queryParameters: 
+          title:
+            displayName: Title
+            type: string
+            description: An issue title to search for
+            example: Fix bug in db
+            required: false
+          description:
+            displayName: Description
+            type: string
+            description: An description to search for
+            example: found in production
+            required: false
+          statusId:
+            displayName: Status
+            type: integer
+            description: Filter by issue status id
+            example: 5
+            required: false
+          creatorId:
+            displayName: Creator
+            type: integer
+            description: Filter by creator id
+            example: 2
+            required: false
+          assigneeId:
+            displayName: Assignee
+            type: integer
+            description: Filter by assignee id
+            example: 2
+            required: false
+          type:
+            displayName: Type
+            type: string
+            description: Filter by issue type
+            example: BUG
+            required: false
+      /{id}:
+        type: member
+        is: memberSecured
+        /comments:
+          type: collection
+          is: memberSecured
+          /{id}:
+            type: member
+            put:
+              is: ownerSecured
+            delete:
+              is: ownerSecured
+        /linkedIssues:
+          type: collection
+          is: memberSecured
+          /{id}:
+            type: immutable_member
+            is: memberSecured
+
+/issueStatuses:
+  type: collection
+  get:
+    queryParameters:
+      project:
+        displayName: Project Id
+        type: integer
+        description: A project to filter by
+        example: 6
+        required: false
+      type:
+        displayName: Type
+        type: string
+        description: Filter by issue status type
+        example: BUG
+        required: false
+  /{id}:
+    type: member
+
+/projectMembers:
+  type: collection
+  post:
+    is: ownerSecured
+  /{id}:
+    type: immutable_member
+    delete:
+      is: ownerSecured

@@ -1,0 +1,21 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  projectId:
+    displayName: Projectid
+    default: 0
+    type: integer
+    required: false
+  userId:
+    displayName: Userid
+    default: 0
+    type: integer
+    required: false
+example: !include projectMember_example.raml

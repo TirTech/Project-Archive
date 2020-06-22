@@ -1,0 +1,33 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: true
+  name:
+    displayName: Name
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  description:
+    displayName: Description
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  status:
+    displayName: Status
+    default: ''
+    type: string
+    required: false
+  ownerId:
+    displayName: Ownerid
+    default: 0
+    type: integer
+    required: false
+example: !include project_example.raml

@@ -1,0 +1,21 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  parentIssueId:
+    displayName: Parentissueid
+    default: 0
+    type: integer
+    required: false
+  childIssueId:
+    displayName: Childissueid
+    default: 0
+    type: integer
+    required: false
+example: !include linkedIssue_example.raml

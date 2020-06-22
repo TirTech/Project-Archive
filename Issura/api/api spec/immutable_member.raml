@@ -1,0 +1,28 @@
+#%RAML 1.0 ResourceType
+description: A specific instance of <<resourcePathName>>
+uriParameters:
+  id:
+    description: The id of the <<resourcePathName | !singularize>>
+    required: true
+    type: integer
+get:
+  description: Retrieve this <<resourcePathName | !singularize>>
+  responses:
+    200:
+      description: Success
+      body:
+        application/json:
+          type: <<resourcePathName | !singularize>>
+    404:
+      description: The <<resourcePathName | !singularize>> does not exist
+delete:
+  description: Delete this <<resourcePathName | !singularize>>
+  responses:
+    500:
+      description: Internal Server Error
+    404:
+      description: The <<resourcePathName | !singularize>> does not exist
+    204:
+      description: The <<resourcePathName | !singularize>> successfully deleted
+    409:
+      description: The <<resourcePathName | !singularize>> is referenced by another resource and cannot be deleted

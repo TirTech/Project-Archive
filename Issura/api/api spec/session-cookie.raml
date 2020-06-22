@@ -1,0 +1,13 @@
+#%RAML 1.0 SecurityScheme
+
+type: x-custom
+description: User authentication via provided cookie
+describedBy: 
+  headers: 
+    Cookie:
+      description: Session Cookie
+      type: string
+      required: true
+  responses: 
+    403:
+      description: User is not logged in

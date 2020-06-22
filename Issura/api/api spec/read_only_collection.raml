@@ -1,0 +1,14 @@
+#%RAML 1.0 ResourceType
+
+description: Read <<resourcePathName>>
+get:
+  description: Get all <<resourcePathName>>
+  displayName: <<resourcePathName | !singularize>> Get
+  responses:
+        500:
+          description: Internal Server Error
+        200:
+          description: Get OK
+          body:
+            application/json:
+              type: <<resourcePathName | !singularize>>[]

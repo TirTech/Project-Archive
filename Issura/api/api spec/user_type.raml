@@ -1,0 +1,24 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  username:
+    displayName: Username
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  nickname:
+    displayName: Nickname
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+
+example: !include user_example.raml

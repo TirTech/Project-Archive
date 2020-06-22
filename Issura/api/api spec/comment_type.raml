@@ -1,0 +1,34 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  creatorId:
+    displayName: Creatorid
+    default: 0
+    type: integer
+    required: false
+  issueId:
+    displayName: Issueid
+    default: 0
+    type: integer
+    required: false
+  text:
+    displayName: Text
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  dateCreated:
+    displayName: Datecreated
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+
+example: !include comment_example.raml

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="InfoServer" overwriteAll="false" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="InfoServer">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home1/ugrads/bfrankli/git/INFO3103-Project" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/.idea" />
+            <excludedPath local="true" path="$PROJECT_DIR$/issura/src" />
+            <excludedPath local="true" path="$PROJECT_DIR$/issura/public" />
+            <excludedPath local="true" path="$PROJECT_DIR$/issura/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

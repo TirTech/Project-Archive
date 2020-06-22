@@ -1,0 +1,35 @@
+#%RAML 1.0 ResourceType
+
+description: Create or Read all <<resourcePathName>>
+get:
+  description: Get all <<resourcePathName>>
+  displayName: <<resourcePathName | !singularize>> Get
+  responses:
+        500:
+          description: Internal Server Error
+        200:
+          description: Get OK
+          body:
+            application/json:
+              type: <<resourcePathName>>
+        403:
+          description: User is not logged in or may not view this resource
+post:
+  description: Create a(n) <<resourcePathName | !singularize>>
+  displayName: <<resourcePathName | !singularize>> Post
+  responses:
+    201:
+      description: Successfully created resource
+      body:
+        application/json:
+          description: URI of created resource
+          example: <<resourcePath>>/5
+    500:
+      description: Internal Server Error
+    400:
+      description: Body was malformed
+    409:
+      description: A resource referenced by id does not exist
+  body:
+    application/json:
+      type: <<resourcePathName | !singularize>>

@@ -1,0 +1,34 @@
+#%RAML 1.0 DataType
+displayName: Root
+type: object
+additionalProperties: true
+properties:
+  id:
+    displayName: Id
+    default: 0
+    type: integer
+    required: false
+  name:
+    displayName: Name
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  color:
+    displayName: Color
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+  projectId:
+    displayName: Projectid
+    default: 0
+    type: integer
+    required: false
+  typeCode:
+    displayName: Typecode
+    default: ''
+    type: string
+    pattern: .*
+    required: false
+example: !include issueStatus_example.raml
